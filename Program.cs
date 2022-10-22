@@ -51,6 +51,36 @@ else Console.WriteLine($"Введенный элемент = {Array2[iRows -1, j
 
         break;
 
+    case 3:
+//Задайте двумерный массив из целых чисел. Найдите среднее арифметическое элементов в каждом столбце.
+//Например, задан массив:
+//1 4 7 2
+//5 9 2 3
+//8 4 2 4
+//Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+Console.WriteLine("Введи кол-во строк: ");
+int rows3 = int.Parse(Console.ReadLine()!);
+Console.WriteLine("Введи кол-во столбцов: ");
+int columns3 = int.Parse(Console.ReadLine()!);
+
+double[,] Array3 = GetArray(rows3, columns3, -9, 9);
+PrintArray1(Array3);
+Console.Write("Среднее арифметическое каждого столбца: ");
+
+int j = 0;
+double sum = 0;
+while (j <= rows3){
+    for (int i = 0; i < Array3.GetLength(0); i++){
+        sum += Array3[i,j] / rows3;       
+          
+    }
+    Console.Write($"{sum}; ");
+    sum = 0;
+    j++;
+}
+
+    break;
+
 //////////////////////////////////////////////////////////////////////////////////////
 //Метод задания двойного рандома (первый целочисленный + второй с точкой от 0 до 1)
 double[,] GetArrayRand(int m, int n, int minValue, int maxValue){
