@@ -78,7 +78,6 @@ while (j <= rows3){
     sum = 0;
     j++;
 }
-
     break;
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -114,5 +113,78 @@ void PrintArray1(double[,] array){
     }
 }
 
+
+
+///////////////////////////////////////////////////////////
+//Решение дополнительных заданий
+
+    case 4:
+//Задача №4
+//Сформируйте трёхмерный массив из неповторяющихся двузначных чисел. 
+//Напишите программу, которая будет построчно выводить массив, добавляя индексы каждого элемента.
+//Массив размером 2 x 2 x 2
+//66(0,0,0) 25(0,1,0)
+//34(1,0,0) 41(1,1,0)
+//27(0,0,1) 90(0,1,1)
+//26(1,0,1) 55(1,1,1)
+Console.WriteLine("Введи кол-во элеметов по x: ");
+int x1 = int.Parse(Console.ReadLine()!);
+Console.WriteLine("Введи кол-во элементов по y: ");
+int y1 = int.Parse(Console.ReadLine()!);
+Console.WriteLine("Введи кол-во элементов по z: ");
+int z1 = int.Parse(Console.ReadLine()!);
+
+int[, ,] Array4 = GetArray3(x1, y1, z1, 10, 100);
+PrintArray3(Array4);
+
+//Метод задания одномерного массива с уникальными значениями и заполнение этими значениями трехмерного массива 
+int[, ,] GetArray3(int m, int n, int l, int minValue, int maxValue){
+    int size = m * n * l;
+    int[] array = new int [size];
+    for(int i = 0; i < array.Length; i++){
+        array[i] = new Random().Next(minValue,maxValue - 1);
+
+    }
+    
+        for (int sr = 0; sr <  array.Length - 1; sr ++){
+            int comp = 0;
+            while(comp < array.Length - 1){
+                if(array[comp] == array[sr]){
+                array[comp] = new Random().Next(minValue, maxValue - 1);
+                comp++;
+                }
+                else comp++;        
+            }      
+        }
+    
+    Console.Write(String.Join(", ", array));
+
+    Console.WriteLine();
+    
+    int[, ,] result = new int[m,n,l];
+
+    for(int i = 0; i < m; i++){
+        for(int j = 0; j < n; j++){
+            for(int k = 0; k < l; k++){
+            result[i,j,k] = array[k + 3 * j + 9 * i];                    
+            }
+        }
+    }
+    return result;
+}
+
+//Метод вывода трехмерного массива с индексом элемента
+void PrintArray3(int[, ,] array){
+    for(int i = 0; i < array.GetLength(0); i++){
+        for(int j = 0; j < array.GetLength(1); j++){
+            for(int k = 0; k < array.GetLength(2); k++){
+            Console.Write($"{array[i,j,k], 5}({i},{j},{k}) ");
+            }
+            Console.WriteLine();
+        }        
+    }
+}
+
+        break;
 
 } //switch
