@@ -3,15 +3,13 @@ int ExNum = int.Parse(Console.ReadLine()!);
 
 switch (ExNum){
     case 1:
-
-
 //Задание №1
 //Задайте двумерный массив размером m×n, заполненный случайными вещественными числами.
 //m = 3, n = 4.
 //0,5 7 -2 -0,2
 //1 -3,3 8 -9,9
 //8 7,8 -7,1 9
-
+Console.WriteLine("---------------Задание №1---------------");
 Console.WriteLine("Введи кол-во строк: ");
 int rows1 = int.Parse(Console.ReadLine()!);
 Console.WriteLine("Введи кол-во столбцов: ");
@@ -31,7 +29,7 @@ PrintArray1(Array1);
 //8 4 2 4
 ///i = 4, j = 2 -> такого числа в массиве нет
 //i = 1, j = 2 -> 2
-
+Console.WriteLine("---------------Задание №2---------------");
 Console.WriteLine("Введи кол-во строк: ");
 int rows2 = int.Parse(Console.ReadLine()!);
 Console.WriteLine("Введи кол-во столбцов: ");
@@ -58,6 +56,7 @@ else Console.WriteLine($"Введенный элемент = {Array2[iRows -1, j
 //5 9 2 3
 //8 4 2 4
 //Среднее арифметическое каждого столбца: 4,6; 5,6; 3,6; 3.
+Console.WriteLine("---------------Задание №3---------------");
 Console.WriteLine("Введи кол-во строк: ");
 int rows3 = int.Parse(Console.ReadLine()!);
 Console.WriteLine("Введи кол-во столбцов: ");
@@ -114,8 +113,7 @@ void PrintArray1(double[,] array){
 }
 
 
-
-///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
 //Решение дополнительных заданий
 
     case 4:
@@ -127,6 +125,7 @@ void PrintArray1(double[,] array){
 //34(1,0,0) 41(1,1,0)
 //27(0,0,1) 90(0,1,1)
 //26(1,0,1) 55(1,1,1)
+Console.WriteLine("---------------Задание №4---------------");
 Console.WriteLine("Введи кол-во элеметов по x: ");
 int x1 = int.Parse(Console.ReadLine()!);
 Console.WriteLine("Введи кол-во элементов по y: ");
@@ -143,9 +142,7 @@ int[, ,] GetArray3(int m, int n, int l, int minValue, int maxValue){
     int[] array = new int [size];
     for(int i = 0; i < array.Length; i++){
         array[i] = new Random().Next(minValue,maxValue - 1);
-
-    }
-    
+    }  
         for (int sr = 0; sr <  array.Length - 1; sr ++){
             int comp = 0;
             while(comp < array.Length - 1){
@@ -187,4 +184,54 @@ void PrintArray3(int[, ,] array){
 
         break;
 
+    case 5:
+//Задание №5
+//Напишите программу, которая заполнит спирально массив 4 на 4.
+//Например, на выходе получается вот такой массив:
+//01 02 03 04
+//12 13 14 05
+//11 16 15 06
+//10 09 08 07
+Console.WriteLine("---------------Задание №5---------------");
+Console.WriteLine("Введите размерность квадратной матрицы");
+int Square = int.Parse(Console.ReadLine()!);
+int[,] spin = new int[Square,Square];
+ArraySpinPaint(spin, Square);
+PrintArray(spin);
+
+void PrintArray(int[,] array){
+    for(int i = 0; i < array.GetLength(0); i++){
+        for(int j = 0; j < array.GetLength(1); j++){
+            if (array[i,j] < 10) Console.Write($"0{array[i,j]} ");
+            else Console.Write($"{array[i,j]} ");
+        }
+        Console.WriteLine();
+    }
+}
+
+//Метод заполнения по спирали
+int[,] ArraySpinPaint(int[,] array, int sq){
+int number = 1;
+for (int i = 0; i < array.GetLength(0); i++){
+    for (int j = 0; j < array.GetLength(1); j++){
+        while(number <= sq*sq){
+            array[i,j] = number;
+            if (i <= j + 1 && i + j < sq - 1)  j++;
+            else if (i < j && i + j >= sq - 1) i++;
+            else if (i >= j && i + j > sq - 1) j--;
+            else i--;
+            number++;
+        }   
+    }
+}
+return array;
+}
+
+        break;
+   
+    default:
+    Console.WriteLine("Такого задания не делали");
+        break;
 } //switch
+
+
